@@ -6,10 +6,15 @@ import           Models
 
 gameOfLife :: Grid -> Integer -> Grid
 gameOfLife initial 0 p = initial p
-gameOfLife initial n p = nextStep current adjacentCells where
-  current :: Cell         = gameOfLife initial (n - 1) p
-  adjacentCells :: [Cell] = gameOfLife initial (n - 1) <$> adjacents p
+gameOfLife initial n p = nextStep previousCellStatus previousAdjacentStatus where
+  previousCellStatus :: Cell       = gameOfLife initial (n - 1) p
+  previousAdjacentStatus :: [Cell] = gameOfLife initial (n - 1) <$> adjacents p
 
+iterate :: Grid -> Integer -> Grid
+iterate initial 0 = initial
+iterate initial n p =  
+
+-- how to write this with pattern match
 nextStep :: Cell -> [Cell] -> Cell
 nextStep Alive surrounding | count Alive surrounding < 2 = Dead
                            | count Alive surrounding > 3 = Dead
