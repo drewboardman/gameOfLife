@@ -1,6 +1,7 @@
 module Main where
 
-import Game
-
 main :: IO ()
-main = undefined
+main = do
+  initial <- loadInitialGrid
+  let f = gameOfLife initial
+  animate FullScreen white (gameOfLifeAnimation f)
